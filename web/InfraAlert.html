@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Chamados</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-dark text-white">
+    <div class="container mt-4">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <button class="btn btn-primary">Logo</button>
+            <button class="btn btn-success" id="criarChamadoBtn" name="criarChamadoBtn">+ Criar Chamado</button>
+        </div>
+        <div id="chamadoModal" class="modal" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content bg-dark text-white">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Criar Chamado</h5>
+                        <button type="button" class="btn-close btn-close-white" id="fecharModal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <label for="titulo">Título:</label>
+                        <input type="text" id="titulo" class="form-control" maxlength="60">
+                        
+                        <label for="descricao">Descrição:</label>
+                        <textarea id="descricao" class="form-control" maxlength="300"></textarea>
+                        
+                        <label for="cidade">Cidade:</label>
+                        <input type="text" id="cidade" class="form-control" maxlength="50">
+                        
+                        <label for="bairro">Bairro:</label>
+                        <input type="text" id="bairro" class="form-control" maxlength="50">
+                        
+                        <label for="rua">Rua:</label>
+                        <input type="text" id="rua" class="form-control" maxlength="50">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" id="fecharModal">Fechar</button>
+                        <button type="button" class="btn btn-success" id="salvarChamado">Salvar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Contêiner para os chamados -->
+        <div id="chamadosContainer" class="row mt-4"></div>
+        <h2 class="text-center">Lista de Chamados</h2>
+        
+        <div class="row mt-4">
+            <!-- Cards de chamados -->
+            <div class="col-md-4 mb-3" *ngFor="let chamado of chamados">
+                <div class="card bg-secondary p-3">
+                    <h5 class="text-info">id: 1 <span class="fw-bold">TITULO</span></h5>
+                    <p><strong>Descrição:</strong> Lorem Ipsum is simply dummy text of the printing and typesetting industry...</p>
+                    <p><strong>Cidade:</strong> <span class="text-warning">PAYSANDUUU</span></p>
+                    <p><strong>Bairro:</strong> Centro</p>
+                    <p><strong>Rua:</strong> Minha casa da silva</p>
+                </div>
+            </div>
+            
+            <div class="col-md-4 mb-3">
+                <div class="card bg-secondary p-3">
+                    <h5 class="text-info">id: 2 <span class="fw-bold">TITULO</span></h5>
+                    <p><strong>Descrição:</strong> Lorem Ipsum is simply dummy text of the printing and typesetting industry...</p>
+                    <p><strong>Cidade:</strong> <span class="text-warning">PAYSANDUUU</span></p>
+                    <p><strong>Bairro:</strong> Centro</p>
+                    <p><strong>Rua:</strong> Minha casa da silva</p>
+                </div>
+            </div>
+
+            <div class="col-md-4 mb-3">
+                <div class="card bg-secondary p-3">
+                    <h5 class="text-info">id: 3 <span class="fw-bold">TITULO</span></h5>
+                    <p><strong>Descrição:</strong> Lorem Ipsum is simply dummy text of the printing and typesetting industry...</p>
+                    <p><strong>Cidade:</strong> <span class="text-warning">PAYSANDUUU</span></p>
+                    <p><strong>Bairro:</strong> Centro</p>
+                    <p><strong>Rua:</strong> Minha casa da silva</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+    document.addEventListener("DOMContentLoaded", function () {
+    const criarChamadoBtn = document.getElementById("criarChamadoBtn");
+    const modal = document.getElementById("chamadoModal");
+    const fecharModal = document.getElementById("fecharModal");
+    const salvarChamado = document.getElementById("salvarChamado");
+    const chamadosContainer = document.getElementById("chamadosContainer");
+
+    criarChamadoBtn.addEventListener("click", function () {
+        modal.style.display = "block";
+    });
+
+    fecharModal.addEventListener("click", function () {
+        modal.style.display = "none";
+    });
+
+    window.addEventListener("click", function (event) {
+        if (event.target === modal) {
+            modal.style.display = "none";
+        }
+    });
+
+    salvarChamado.addEventListener("click", function () {
+        const titulo = document.getElementById("titulo").value.trim();
+        const descricao = document.getElementById("descricao").value.trim();
+        const cidade = document.getElementById("cidade").value.trim();
+        const bairro = document.getElementById("bairro").value.trim();
+        const rua = document.getElementById("rua").value.trim();
+
+        if (titulo.length > 60 || descricao.length > 300 || cidade.length > 50 || bairro.length > 50 || rua.length > 50) {
+            alert("Por favor, respeite os limites de caracteres: \n- Título: 60\n- Descrição: 300\n- Cidade, Bairro, Rua: 50 cada");
+            return;
+        }
+
+        const chamado = document.createElement("div");
+        chamado.classList.add("card", "p-3", "mb-3");
+        chamado.innerHTML = `
+            <strong>ID: ${Date.now()}</strong>
+            <h5>${titulo}</h5>
+            <p>${descricao}</p>
+            <small><strong>Cidade:</strong> ${cidade} | <strong>Bairro:</strong> ${bairro} | <strong>Rua:</strong> ${rua}</small>
+        `;
+        chamadosContainer.appendChild(chamado);
+        modal.style.display = "none";
+    });
+});
+
+    </script>
+</body>
+</html>
