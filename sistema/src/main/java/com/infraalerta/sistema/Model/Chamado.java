@@ -24,6 +24,43 @@ public class Chamado {
 
     private String rua;
 
+    public Chamado(String titulo, String descricao, int curtidas, String cidade, String bairro, String rua) {
+        this.titulo = titulo;
+        this.descricao = descricao;
+        this.curtidas = curtidas;
+        this.cidade = cidade;
+        this.bairro = bairro;
+        this.rua = rua;
+    }
+
+    public Chamado() {
+
+    }
+
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
+    public void setCurtidas(int curtidas) {
+        this.curtidas = curtidas;
+    }
+
+    public void setCidade(String cidade) {
+        this.cidade = cidade;
+    }
+
+    public void setBairro(String bairro) {
+        this.bairro = bairro;
+    }
+
+    public void setRua(String rua) {
+        this.rua = rua;
+    }
+
     public Long getId() {
         return id;
     }
