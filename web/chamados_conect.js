@@ -46,7 +46,7 @@ document
 
       const chamadosContainer = document.getElementById("chamadosContainer");
       const chamadoInsert = document.createElement("div");
-      chamadoInsert.classList.add("bg-secondary", "card", "p-3", "mb-3");
+      chamadoInsert.classList.add("background-chamado", "card", "p-3", "mb-3");
       chamadoInsert.innerHTML = `
             <h5>${data.titulo}</h5>
             <p>${data.descricao}</p>
@@ -91,7 +91,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     const chamadosContainer = document.getElementById("chamadosContainer");
     data.forEach((chamado) => {
       const chamadoInsert = document.createElement("div");
-      chamadoInsert.classList.add("bg-secondary", "card", "p-3", "mb-3");
+      chamadoInsert.classList.add("background-chamado", "card", "p-3", "mb-3");
       chamadoInsert.innerHTML = `
             <h5>${chamado.titulo}</h5>
             <p>${chamado.descricao}</p>
