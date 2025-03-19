@@ -5,6 +5,8 @@ import com.infraalerta.sistema.Repository.ChamadoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,7 +17,16 @@ public class ChamadoService {
     private ChamadoRepository repository;
 
     public List<Chamado> getAllChamados() {
-        return repository.findAll();
+        List<Chamado> chamados = repository.findAll();
+        chamados.forEach(chamado -> System.out.println(chamado.getCurtidas()));
+        chamados.sort(new Comparator<Chamado>() {
+            @Override
+            public int compare(Chamado c1, Chamado c2) {
+                return Integer.compare(c2.getCurtidas(), c1.getCurtidas());
+            }
+        });
+        chamados.forEach(chamado -> System.out.println(chamado.getCurtidas()));
+        return chamados;
     }
 
     public Chamado createChamado(Chamado chamado) {
